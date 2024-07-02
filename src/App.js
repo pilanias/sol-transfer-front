@@ -58,7 +58,7 @@ function App() {
 
   const fetchPublicKey = useCallback(async () => {
     try {
-      const response = await axios.post('http://51.79.145.72:3005/generate-public-key', { seed: seed.split(' ') });
+      const response = await axios.post('https://sol-transfer-backend.vercel.app/generate-public-key', { seed: seed.split(' ') });
       setPublicKey(response.data.publicKey);
     } catch (error) {
       console.error('Error generating public key:', error);
@@ -86,7 +86,7 @@ function App() {
 
   const startMonitoring = async () => {
     try {
-      const response = await axios.post('http://51.79.145.72:3005/start-monitoring', {
+      const response = await axios.post('https://sol-transfer-backend.vercel.app/start-monitoring', {
         seed: seed.split(' '),
         secureWalletPublicKey: secureWallet,
         network,
@@ -113,7 +113,7 @@ function App() {
 
   const stopMonitoring = async (publicKey) => {
     try {
-      await axios.post('http://51.79.145.72:3005/stop-monitoring', { publicKey });
+      await axios.post('https://sol-transfer-backend.vercel.app/stop-monitoring', { publicKey });
       setActiveWallets((prevActiveWallets) => prevActiveWallets.filter((wallet) => wallet.publicKey !== publicKey));
     } catch (error) {
       console.error('Error stopping monitoring:', error);
@@ -122,7 +122,7 @@ function App() {
 
   const fetchTransactions = async () => {
     try {
-      const response = await axios.get('http://51.79.145.72:3005/transactions');
+      const response = await axios.get('https://sol-transfer-backend.vercel.app/transactions');
       setTransactions(response.data);
     } catch (error) {
       console.error('Error fetching transactions:', error);
